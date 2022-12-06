@@ -33,6 +33,7 @@ pipeline {
             steps {
              sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://devsecops12.eastus.cloudapp.azure.com:9000 -Dsonar.login=sqp_3a53220acd51ea4387cd19ecee02829613e290e3"
             }
+            
          }    
         
   }

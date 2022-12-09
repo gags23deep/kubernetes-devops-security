@@ -26,8 +26,8 @@ pipeline {
             post { 
               always { 
                 pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-                     }
-                  }  
+          }
+        }  
       }  
       stage('SonarQube - SAST') {
             steps {
@@ -35,6 +35,22 @@ pipeline {
             }
 
          }    
+      stage('SonarQube - SAST') {
+        steps {
+          withSonarQubeEnv('SonarQube') {
+            sh "mvn sonar:sonar \
+                    -Dsonar.projectKey=numeric-application \
+                    -Dsonar.host.url=http://devsecops-demo.eastus.cloudapp.azure.com:9000"
+          }
+          timeout(time: 2, unit: 'MINUTES') {
+            script {
+              waitForQualityGate abortPipeline: true
+            }
+          }
+        }
+      }
+
+      
         
   }
 

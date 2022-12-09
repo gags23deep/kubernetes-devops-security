@@ -29,24 +29,20 @@ pipeline {
           }
         }  
       }  
+
+     
       stage('SonarQube - SAST') {
             steps {
-             sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://devsecops12.eastus.cloudapp.azure.com:9000 -Dsonar.login=sqp_3a53220acd51ea4387cd19ecee02829613e290e3"
-            }
-
-         }    
-      stage('SonarQube - SAST') {
-        steps {
-          withSonarQubeEnv('SonarQube') {
-            sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://devsecops12.eastus.cloudapp.azure.com:9000"
-          }
-          timeout(time: 2, unit: 'MINUTES') {
-            script {
-              waitForQualityGate abortPipeline: true
+              withSonarQubeEnv('SonarQube') {
+                sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://devsecops12.eastus.cloudapp.azure.com:9000"
+              }
+              timeout(time: 2, unit: 'MINUTES') {
+                script {
+                  waitForQualityGate abortPipeline: true
+                }
+              }
             }
           }
-        }
-      }
 
       
         

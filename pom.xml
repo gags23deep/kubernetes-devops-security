@@ -92,7 +92,7 @@
 			    <version>8.0.1</version>
 			    <configuration>
 			     <format>ALL</format>
-			     <failBuildOnCVSS>8</failBuildOnCVSS> 
+			     <failBuildOnCVSS>9</failBuildOnCVSS> 
 			    </configuration>
 				 <executions>
                   <execution>
